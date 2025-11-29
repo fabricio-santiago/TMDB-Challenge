@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Rick and Morty</string>
+
+    //CharactersScreen
+    <string name="characters_screen_title_app_bar">Popular Movies</string>
+
+    //CharactersContent
+    <string name="characters_content_description_lazy_vertical_grid">Responsável por listar todos os personagens</string>
+    <string name="characters_content_error_message">Erro ao listar os personagens</string>
+
+    //CharactersItem
+    <string name="characters_item_description_outlined_card">Responsável por representar o card de cada personagem e também a navegação até a tela de localizações.</string>
+    <string name="characters_item_description_avatar_image">Foto do personagem.</string>
+    <string name="characters_item_description_name">Nome do personagem.</string>
+    <string name="characters_item_description_gender">Gênero do personagem.</string>
+    <string name="characters_item_description_specie">Espécie do personagem.</string>
+    <string name="characters_item_description_origin">Origem do personagem.</string>
+    <string name="characters_item_description_icon_button">Ícone responsável por mostrar os detalhes.</string>
+
+    //LocationsScreen
+    <string name="locations_screen_title_app_bar">Locations</string>
+    <string name="locations_screen_error_message">Erro ao listar as localizações</string>
+
+    //LocationsContent
+    <string name="locations_content_description_lazy_vertical_grid">Responsável por listar todos as localizações</string>
+
+    //LocationsItem
+    <string name="locations_item_description_outlined_card">Responsável por representar o Card de cada localização.</string>
+    <string name="locations_item_description_name">Nome da localização.</string>
+    <string name="locations_item_description_type">Tipo de localização.</string>
+    <string name="locations_item_description_resident_list">Lista de residentes.</string>
+    <string name="locations_item_description_repository_icon_button">Ícone responsável por mostrar a lista de residentes</string>
+
+    //Components
+    <string name="error_view_button_text">Recarregar</string>
+    <string name="empty_data_screen_description">No data</string>
+
+</resources>
