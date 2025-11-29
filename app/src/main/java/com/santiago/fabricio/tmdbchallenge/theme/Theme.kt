@@ -1,4 +1,4 @@
-package com.santiago.fabricio.tmdbchallenge.ui.theme
+package com.santiago.fabricio.tmdbchallenge.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -21,7 +21,7 @@ private val LightColorPalette = lightColorScheme(
 )
 
 @Composable
-fun InterviewTechnicalTestTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun BaseTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

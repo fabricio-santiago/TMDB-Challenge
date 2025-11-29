@@ -2,27 +2,24 @@ package com.santiago.fabricio.tmdbchallenge.features.presentation.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
-import androidx.paging.compose.LazyPagingItems
+import com.santiago.fabricio.tmdbchallenge.R
 import com.santiago.fabricio.tmdbchallenge.core.data.local.entity.Favorite
+import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritiesViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -30,27 +27,29 @@ fun FavoritiesContent(
     modifier: Modifier = Modifier,
     favorities: List<Favorite>,
     paddingValues: PaddingValues,
+    favoritiesViewModel: FavoritiesViewModel
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "LazyColumn",
-            modifier = Modifier.padding(32.dp),
-            style = TextStyle(
-                color = Color.Black,
-                fontSize = TextUnit(value = 24f, type = TextUnitType.Sp)
-            ),
-            fontWeight = FontWeight.ExtraBold
-        )
+    val context = LocalContext.current
 
-        // lazy column for displaying listview.
-        LazyColumn {
-            // populating items for listview.
-            itemsIndexed(favorities) {_, language ->
-                Text(language.title, modifier = Modifier.padding(15.dp))
-                HorizontalDivider()
+    Surface(modifier = modifier.background(MaterialTheme.colorScheme.background)) {
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(1),
+            contentPadding = paddingValues,
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
+            modifier = Modifier
+                .fillMaxSize()
+                .clearAndSetSemantics {
+                    contentDescription =
+                        context.getString(R.string.favorities_content_description_lazy_vertical_grid)
+                }
+        ) {
+            items(favorities.size) { index ->
+                val favorite = favorities[index]
+                FavoriteItem(
+                    favorite = favorite,
+                    favoritiesViewModel = favoritiesViewModel
+                )
             }
         }
     }

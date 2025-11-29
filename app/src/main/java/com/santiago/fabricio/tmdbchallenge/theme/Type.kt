@@ -1,4 +1,4 @@
-package com.santiago.fabricio.tmdbchallenge.ui.theme
+package com.santiago.fabricio.tmdbchallenge.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

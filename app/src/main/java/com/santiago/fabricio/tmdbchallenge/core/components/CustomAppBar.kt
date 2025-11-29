@@ -9,7 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import com.santiago.fabricio.tmdbchallenge.ui.theme.black
+import com.santiago.fabricio.tmdbchallenge.theme.black
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

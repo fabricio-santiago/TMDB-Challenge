@@ -1,7 +1,7 @@
 package com.santiago.fabricio.tmdbchallenge.core.di
 
-import com.santiago.fabricio.tmdbchallenge.core.data.remote.service.util.ParamsInterceptor
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.service.MoviesService
+import com.santiago.fabricio.tmdbchallenge.core.data.remote.service.util.ParamsInterceptor
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.service.util.SafeApiCaller
 import dagger.Module
 import dagger.Provides
@@ -59,7 +59,7 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideCharactersService(
+    fun provideMoviesService(
         client: OkHttpClient, converterFactory: GsonConverterFactory
     ): MoviesService {
         return Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/movie/").client(client)

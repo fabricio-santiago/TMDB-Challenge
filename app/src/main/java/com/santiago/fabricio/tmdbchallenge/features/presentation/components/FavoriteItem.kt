@@ -12,12 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
@@ -33,21 +30,16 @@ import androidx.compose.ui.unit.dp
 import com.santiago.fabricio.tmdbchallenge.R
 import com.santiago.fabricio.tmdbchallenge.core.components.AsyncAvatarImage
 import com.santiago.fabricio.tmdbchallenge.core.data.local.entity.Favorite
-import com.santiago.fabricio.tmdbchallenge.core.data.remote.model.Movie
-import com.santiago.fabricio.tmdbchallenge.core.util.Constants.BASE_URL_IMAGE
-import com.santiago.fabricio.tmdbchallenge.core.util.UtilFunctions.convertDate
 import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritiesViewModel
 import com.santiago.fabricio.tmdbchallenge.theme.yellow
-import java.text.DecimalFormat
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MovieItem(
-    movie: Movie,
+fun FavoriteItem(
+    favorite: Favorite,
     favoritiesViewModel: FavoritiesViewModel
 ) {
     val context = LocalContext.current
-    val decimalFormat = DecimalFormat("#.##")
 
     OutlinedCard(
         modifier = Modifier
@@ -55,7 +47,7 @@ fun MovieItem(
             .fillMaxWidth()
             .clearAndSetSemantics {
                 contentDescription =
-                    context.getString(R.string.movies_item_description_outlined_card)
+                    context.getString(R.string.favorities_item_description_outlined_card)
             },
         colors = CardDefaults.cardColors(
             containerColor = Color.LightGray,
@@ -69,72 +61,37 @@ fun MovieItem(
             horizontalArrangement = Arrangement.Start
         ) {
             AsyncAvatarImage(
-                dataUrl = BASE_URL_IMAGE + movie.posterPath,
+                dataUrl = favorite.image,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .clearAndSetSemantics {
                         contentDescription =
-                            context.getString(R.string.movies_item_description_image)
+                            context.getString(R.string.favorities_item_description_image)
                     }
             )
             Column(modifier = Modifier.padding(12.dp)) {
-                Text(text = movie.title,
+                Text(text = favorite.title,
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.secondary,
                     modifier = Modifier.clearAndSetSemantics {
                         contentDescription =
-                            context.getString(R.string.movies_item_description_title)
+                            context.getString(R.string.favorities_item_description_title)
                     })
 
-                Spacer(modifier = Modifier.size(4.dp))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Start
-                ) {
-                    Text(text = String.format("Avaliação média: %s", decimalFormat.format(movie.voteAverage)),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.secondary,
-                        modifier = Modifier.clearAndSetSemantics {
-                            contentDescription =
-                                context.getString(R.string.movies_item_description_rating)
-                        })
-                    Icon(imageVector = Icons.Filled.Star,
-                        contentDescription = "star",
-                        modifier = Modifier
-                            .size(24.dp)
-                            .clearAndSetSemantics {
-                                contentDescription =
-                                    context.getString(R.string.movies_item_description_rating_star)
-                            },
-                        tint = Color.Yellow
-                    )
-                }
-
-                Spacer(modifier = Modifier.size(8.dp))
-
-                Text(text = String.format("Data de lançamento: %s", convertDate(movie.releaseDate, "dd/MM/yyyy")),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.secondary,
-                    modifier = Modifier.clearAndSetSemantics {
-                        contentDescription =
-                            context.getString(R.string.movies_item_description_release_date)
-                })
-
-                Spacer(modifier = Modifier.size(8.dp))
+                Spacer(modifier = Modifier.size(16.dp))
 
                 Button(onClick = {
-                    favoritiesViewModel.insert(
+                    favoritiesViewModel.delete(
                         Favorite(
-                            title = movie.title,
-                            image = BASE_URL_IMAGE + movie.posterPath,
-                            rating = movie.voteAverage,
-                            releaseDate = movie.releaseDate
+                            title = favorite.title,
+                            image = favorite.image,
+                            rating = favorite.rating,
+                            releaseDate = favorite.releaseDate
                         )
                     )
                 }, colors = ButtonDefaults.buttonColors(yellow)) {
                     Text(
-                        text = stringResource(R.string.error_view_button_text),
+                        text = stringResource(R.string.remove_favorite_button_text),
                         color = MaterialTheme.colorScheme.secondary,
                         modifier = Modifier.clearAndSetSemantics {
                             contentDescription =

@@ -1,7 +1,6 @@
 package com.santiago.fabricio.tmdbchallenge.core.data.remote.paging
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresExtension
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

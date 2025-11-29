@@ -14,7 +14,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.createGraph
 import com.santiago.fabricio.tmdbchallenge.core.components.BottomNavigationBar
 import com.santiago.fabricio.tmdbchallenge.core.components.Screen
-import com.santiago.fabricio.tmdbchallenge.core.data.local.dao.FavoriteDao
 import com.santiago.fabricio.tmdbchallenge.features.presentation.screens.FavoritiesScreen
 import com.santiago.fabricio.tmdbchallenge.features.presentation.screens.MoviesScreen
 
@@ -22,8 +21,7 @@ import com.santiago.fabricio.tmdbchallenge.features.presentation.screens.MoviesS
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen(
-    navController: NavHostController,
-    favoriteDao: FavoriteDao
+    navController: NavHostController
 ) {
 
     Scaffold(
@@ -34,13 +32,13 @@ fun MainScreen(
         val graph =
             navController.createGraph(startDestination = Screen.Movies.rout) {
                 composable(route = Screen.Movies.rout) {
-                    MoviesScreen(favoriteDao)
+                    MoviesScreen()
                 }
                 composable(route = Screen.Favorites.rout) {
-                    FavoritiesScreen(favoriteDao)
+                    FavoritiesScreen()
                 }
                 composable(route = Screen.Search.rout) {
-                    MoviesScreen(favoriteDao)
+                    MoviesScreen()
                 }
             }
         NavHost(

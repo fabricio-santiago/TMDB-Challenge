@@ -9,7 +9,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.santiago.fabricio.tmdbchallenge.R
 import com.santiago.fabricio.tmdbchallenge.core.components.CustomAppBar
-import com.santiago.fabricio.tmdbchallenge.core.data.local.dao.FavoriteDao
 import com.santiago.fabricio.tmdbchallenge.features.presentation.components.MoviesContent
 import com.santiago.fabricio.tmdbchallenge.features.presentation.state.MoviesState
 import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritiesViewModel
@@ -17,9 +16,9 @@ import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.Movi
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MoviesScreen(favoriteDao: FavoriteDao) {
+fun MoviesScreen() {
     val moviesViewModel: MoviesViewModel = hiltViewModel()
-    val favoritesViewModel: FavoritiesViewModel = hiltViewModel()
+    val favoritiesViewModel: FavoritiesViewModel = hiltViewModel()
 
     val uiState: MoviesState = moviesViewModel.uiState
     val movies = uiState.movies.collectAsLazyPagingItems()
@@ -27,14 +26,14 @@ fun MoviesScreen(favoriteDao: FavoriteDao) {
     Scaffold(
         topBar = {
             CustomAppBar(
-                title = stringResource(id = R.string.characters_screen_title_app_bar),
+                title = stringResource(id = R.string.movies_screen_title_app_bar),
             )
         },
         content = { paddingValues ->
             MoviesContent(
                 pagingMovies = movies,
                 paddingValues = paddingValues,
-                favoritesViewModel = favoritesViewModel
+                favoritiesViewModel = favoritiesViewModel
             )
         }
     )

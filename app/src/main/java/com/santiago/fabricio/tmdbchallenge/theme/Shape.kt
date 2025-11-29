@@ -1,4 +1,4 @@
-package com.santiago.fabricio.tmdbchallenge.ui.theme
+package com.santiago.fabricio.tmdbchallenge.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes

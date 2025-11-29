@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.santiago.fabricio.tmdbchallenge.ui.theme.yellow
+import com.santiago.fabricio.tmdbchallenge.theme.yellow
 
 @Composable
 fun LoadingView(modifier: Modifier = Modifier) {

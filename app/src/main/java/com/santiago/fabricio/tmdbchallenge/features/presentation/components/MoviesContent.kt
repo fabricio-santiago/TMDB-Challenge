@@ -34,7 +34,7 @@ fun MoviesContent(
     modifier: Modifier = Modifier,
     pagingMovies: LazyPagingItems<Movie>,
     paddingValues: PaddingValues,
-    favoritesViewModel: FavoritiesViewModel
+    favoritiesViewModel: FavoritiesViewModel
 ) {
 
     val context = LocalContext.current
@@ -49,7 +49,7 @@ fun MoviesContent(
                 .fillMaxSize()
                 .clearAndSetSemantics {
                     contentDescription =
-                        context.getString(R.string.characters_content_description_lazy_vertical_grid)
+                        context.getString(R.string.movies_content_description_lazy_vertical_grid)
                 }
         ) {
             items(pagingMovies.itemCount) { index ->
@@ -57,7 +57,7 @@ fun MoviesContent(
                 movie?.let { item ->
                     MovieItem(
                         movie = item,
-                        favoritesViewModel = favoritesViewModel
+                        favoritiesViewModel = favoritiesViewModel
                     )
                 }
             }
@@ -85,7 +85,7 @@ fun MoviesContent(
                             span = { GridItemSpan(maxLineSpan) }
                         ) {
                             ErrorView(
-                                message = stringResource(id = R.string.characters_content_error_message),
+                                message = stringResource(id = R.string.movies_content_error_message),
                                 retry = {
                                     retry()
                                 })
@@ -97,7 +97,7 @@ fun MoviesContent(
                             span = { GridItemSpan(maxLineSpan) }
                         ) {
                             ErrorView(
-                                message = stringResource(id = R.string.characters_content_error_message),
+                                message = stringResource(id = R.string.movies_content_error_message),
                                 retry = {
                                     retry()
                                 })

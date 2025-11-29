@@ -15,8 +15,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.santiago.fabricio.tmdbchallenge.R
-import com.santiago.fabricio.tmdbchallenge.ui.theme.white
-import com.santiago.fabricio.tmdbchallenge.ui.theme.yellow
+import com.santiago.fabricio.tmdbchallenge.theme.yellow
 
 @Composable
 fun ErrorView(
