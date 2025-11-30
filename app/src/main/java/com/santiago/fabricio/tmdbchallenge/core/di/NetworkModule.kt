@@ -62,7 +62,7 @@ object NetworkModule {
     fun provideMoviesService(
         client: OkHttpClient, converterFactory: GsonConverterFactory
     ): MoviesService {
-        return Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/movie/").client(client)
+        return Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/").client(client)
             .addConverterFactory(converterFactory).build().create(MoviesService::class.java)
     }
 }

@@ -14,11 +14,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoritiesViewModel @Inject constructor(
+class FavoritesViewModel @Inject constructor(
     private val repository: FavoriteRepository
 ): ViewModel() {
-    private val _allFavorities = MutableStateFlow(emptyList<Favorite>())
-    val allFavorities = _allFavorities.asStateFlow()
+    private val _allFavorites = MutableStateFlow(emptyList<Favorite>())
+    val allFavorites = _allFavorites.asStateFlow()
 
     fun insert(favorite: Favorite) {
         viewModelScope.launch {
@@ -35,7 +35,7 @@ class FavoritiesViewModel @Inject constructor(
     fun fetchAllFavorites() {
         viewModelScope.launch {
             repository.getAll().flowOn(Dispatchers.IO).collect { favorites: List<Favorite> ->
-                _allFavorities.update { favorites }
+                _allFavorites.update { favorites }
             }
         }
     }

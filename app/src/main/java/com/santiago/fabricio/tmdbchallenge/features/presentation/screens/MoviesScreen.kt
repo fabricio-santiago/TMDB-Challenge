@@ -11,14 +11,14 @@ import com.santiago.fabricio.tmdbchallenge.R
 import com.santiago.fabricio.tmdbchallenge.core.components.CustomAppBar
 import com.santiago.fabricio.tmdbchallenge.features.presentation.components.MoviesContent
 import com.santiago.fabricio.tmdbchallenge.features.presentation.state.MoviesState
-import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritiesViewModel
+import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritesViewModel
 import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.MoviesViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MoviesScreen() {
     val moviesViewModel: MoviesViewModel = hiltViewModel()
-    val favoritiesViewModel: FavoritiesViewModel = hiltViewModel()
+    val favoritesViewModel: FavoritesViewModel = hiltViewModel()
 
     val uiState: MoviesState = moviesViewModel.uiState
     val movies = uiState.movies.collectAsLazyPagingItems()
@@ -33,7 +33,7 @@ fun MoviesScreen() {
             MoviesContent(
                 pagingMovies = movies,
                 paddingValues = paddingValues,
-                favoritiesViewModel = favoritiesViewModel
+                favoritesViewModel = favoritesViewModel
             )
         }
     )

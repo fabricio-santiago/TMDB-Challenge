@@ -19,15 +19,15 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.dp
 import com.santiago.fabricio.tmdbchallenge.R
 import com.santiago.fabricio.tmdbchallenge.core.data.local.entity.Favorite
-import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritiesViewModel
+import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritesViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun FavoritiesContent(
+fun FavoritesContent(
     modifier: Modifier = Modifier,
-    favorities: List<Favorite>,
+    favorites: List<Favorite>,
     paddingValues: PaddingValues,
-    favoritiesViewModel: FavoritiesViewModel
+    favoritesViewModel: FavoritesViewModel
 ) {
     val context = LocalContext.current
 
@@ -41,14 +41,14 @@ fun FavoritiesContent(
                 .fillMaxSize()
                 .clearAndSetSemantics {
                     contentDescription =
-                        context.getString(R.string.favorities_content_description_lazy_vertical_grid)
+                        context.getString(R.string.favorites_content_description_lazy_vertical_grid)
                 }
         ) {
-            items(favorities.size) { index ->
-                val favorite = favorities[index]
+            items(favorites.size) { index ->
+                val favorite = favorites[index]
                 FavoriteItem(
                     favorite = favorite,
-                    favoritiesViewModel = favoritiesViewModel
+                    favoritesViewModel = favoritesViewModel
                 )
             }
         }

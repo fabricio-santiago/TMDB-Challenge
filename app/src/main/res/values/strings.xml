@@ -16,16 +16,19 @@
     <string name="movies_item_description_rating_star">Ícone de estrela da avaliação.</string>
     <string name="movies_item_description_release_date">Data de lançamento do filme.</string>
 
-    //FavoritiesScreen
-    <string name="favorities_screen_title_app_bar">Favoritos</string>
+    //FavoritesScreen
+    <string name="favorites_screen_title_app_bar">Favoritos</string>
 
-    //FavoritiesContent
-    <string name="favorities_content_description_lazy_vertical_grid">Responsável por listar todos os favoritos</string>
+    //FavoritesContent
+    <string name="favorites_content_description_lazy_vertical_grid">Responsável por listar todos os favoritos</string>
 
     //FavoriteItem
-    <string name="favorities_item_description_outlined_card">Responsável por representar o Card de cada localização.</string>
-    <string name="favorities_item_description_image">Poster do filme.</string>
-    <string name="favorities_item_description_title">Título do filme.</string>
+    <string name="favorites_item_description_outlined_card">Responsável por representar o Card de cada localização.</string>
+    <string name="favorites_item_description_image">Poster do filme.</string>
+    <string name="favorites_item_description_title">Título do filme.</string>
+
+    //SearchScreen
+    <string name="search_screen_title_app_bar">Busca de Filmes</string>
 
     //Components
     <string name="error_view_button_text">Recarregar</string>
@@ -33,5 +36,6 @@
     <string name="add_favorite_button_text">Incluir Favorito</string>
     <string name="remove_favorite_button_text">Remover Favorito</string>
     <string name="movies_favorite_button">Botão de inclusão ou exclusão dos favoritos</string>
+    <string name="search_bar_label">Digite o título de algum filme</string>
 
 </resources>

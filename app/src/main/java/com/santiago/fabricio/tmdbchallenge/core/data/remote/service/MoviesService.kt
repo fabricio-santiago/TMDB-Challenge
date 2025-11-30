@@ -8,12 +8,16 @@ import retrofit2.http.Query
 
 interface MoviesService {
 
-    @Headers(
-        "Authorization: Bearer ${BuildConfig.API_KEY}",
-        "accept: application/json"
-    )
-    @GET("popular")
+    @Headers("Authorization: Bearer ${BuildConfig.API_KEY}", "accept: application/json")
+    @GET("movie/popular")
     suspend fun getMovies(
         @Query("page") page: Int
+    ): MoviesResponse
+
+    @Headers("Authorization: Bearer ${BuildConfig.API_KEY}", "accept: application/json")
+    @GET("search/movie")
+    suspend fun getSearchMovie(
+        @Query("page") page: Int,
+        @Query("query") query: String
     ): MoviesResponse
 }

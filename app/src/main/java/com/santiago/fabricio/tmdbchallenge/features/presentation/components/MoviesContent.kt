@@ -19,14 +19,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.santiago.fabricio.tmdbchallenge.R
 import com.santiago.fabricio.tmdbchallenge.core.components.ErrorView
 import com.santiago.fabricio.tmdbchallenge.core.components.LoadingView
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.model.Movie
-import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritiesViewModel
+import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritesViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -34,7 +33,7 @@ fun MoviesContent(
     modifier: Modifier = Modifier,
     pagingMovies: LazyPagingItems<Movie>,
     paddingValues: PaddingValues,
-    favoritiesViewModel: FavoritiesViewModel
+    favoritesViewModel: FavoritesViewModel
 ) {
 
     val context = LocalContext.current
@@ -57,7 +56,7 @@ fun MoviesContent(
                 movie?.let { item ->
                     MovieItem(
                         movie = item,
-                        favoritiesViewModel = favoritiesViewModel
+                        favoritesViewModel = favoritesViewModel
                     )
                 }
             }

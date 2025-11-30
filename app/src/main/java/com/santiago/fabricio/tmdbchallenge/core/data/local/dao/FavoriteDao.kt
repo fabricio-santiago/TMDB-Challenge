@@ -13,6 +13,6 @@ interface FavoriteDao {
     suspend fun insert(favorite: Favorite)
     @Delete
     suspend fun delete(favorite: Favorite)
-    @Query("SELECT * FROM favorities")
-    fun getAllFavorities(): Flow<List<Favorite>>
+    @Query("SELECT * FROM favorites")
+    fun getAllFavorites(): Flow<List<Favorite>>
 }

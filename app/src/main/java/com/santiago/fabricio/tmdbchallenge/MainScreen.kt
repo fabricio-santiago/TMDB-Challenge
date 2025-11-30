@@ -14,8 +14,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.createGraph
 import com.santiago.fabricio.tmdbchallenge.core.components.BottomNavigationBar
 import com.santiago.fabricio.tmdbchallenge.core.components.Screen
-import com.santiago.fabricio.tmdbchallenge.features.presentation.screens.FavoritiesScreen
+import com.santiago.fabricio.tmdbchallenge.features.presentation.screens.FavoritesScreen
 import com.santiago.fabricio.tmdbchallenge.features.presentation.screens.MoviesScreen
+import com.santiago.fabricio.tmdbchallenge.features.presentation.screens.SearchScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -35,10 +36,10 @@ fun MainScreen(
                     MoviesScreen()
                 }
                 composable(route = Screen.Favorites.rout) {
-                    FavoritiesScreen()
+                    FavoritesScreen()
                 }
                 composable(route = Screen.Search.rout) {
-                    MoviesScreen()
+                    SearchScreen()
                 }
             }
         NavHost(
@@ -46,6 +47,5 @@ fun MainScreen(
             graph = graph,
             modifier = Modifier.padding(innerPadding)
         )
-
     }
 }

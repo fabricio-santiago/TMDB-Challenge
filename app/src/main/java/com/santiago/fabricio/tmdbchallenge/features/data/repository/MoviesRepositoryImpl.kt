@@ -19,6 +19,15 @@ class MoviesRepositoryImpl(
             }
         ).flow
     }
+
+    override fun getSearchMovies(pagingConfig: PagingConfig, query: String): Flow<PagingData<Movie>> {
+        return Pager(
+            config = pagingConfig,
+            pagingSourceFactory = {
+                remoteDataSource.getSearchMoviesPageSource()
+            }
+        ).flow
+    }
 }
 
 

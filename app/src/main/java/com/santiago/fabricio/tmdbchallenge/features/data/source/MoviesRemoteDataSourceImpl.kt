@@ -1,6 +1,7 @@
 package com.santiago.fabricio.tmdbchallenge.features.data.source
 
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.paging.MoviesPageSource
+import com.santiago.fabricio.tmdbchallenge.core.data.remote.paging.SearchPageSource
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.response.MoviesResponse
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.service.MoviesService
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.service.util.SafeApiCaller
@@ -17,5 +18,13 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getMovies(page: Int): MoviesResponse {
         return service.getMovies(page)
+    }
+
+    override fun getSearchMoviesPageSource(): SearchPageSource {
+        return SearchPageSource(this, safeApiCaller)
+    }
+
+    override suspend fun getSearchMovies(page: Int, query: String): MoviesResponse {
+        return service.getSearchMovie(page, query)
     }
 }

@@ -30,14 +30,14 @@ import androidx.compose.ui.unit.dp
 import com.santiago.fabricio.tmdbchallenge.R
 import com.santiago.fabricio.tmdbchallenge.core.components.AsyncAvatarImage
 import com.santiago.fabricio.tmdbchallenge.core.data.local.entity.Favorite
-import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritiesViewModel
+import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritesViewModel
 import com.santiago.fabricio.tmdbchallenge.theme.yellow
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun FavoriteItem(
     favorite: Favorite,
-    favoritiesViewModel: FavoritiesViewModel
+    favoritesViewModel: FavoritesViewModel
 ) {
     val context = LocalContext.current
 
@@ -47,7 +47,7 @@ fun FavoriteItem(
             .fillMaxWidth()
             .clearAndSetSemantics {
                 contentDescription =
-                    context.getString(R.string.favorities_item_description_outlined_card)
+                    context.getString(R.string.favorites_item_description_outlined_card)
             },
         colors = CardDefaults.cardColors(
             containerColor = Color.LightGray,
@@ -66,7 +66,7 @@ fun FavoriteItem(
                     .align(Alignment.CenterVertically)
                     .clearAndSetSemantics {
                         contentDescription =
-                            context.getString(R.string.favorities_item_description_image)
+                            context.getString(R.string.favorites_item_description_image)
                     }
             )
             Column(modifier = Modifier.padding(12.dp)) {
@@ -75,13 +75,13 @@ fun FavoriteItem(
                     color = MaterialTheme.colorScheme.secondary,
                     modifier = Modifier.clearAndSetSemantics {
                         contentDescription =
-                            context.getString(R.string.favorities_item_description_title)
+                            context.getString(R.string.favorites_item_description_title)
                     })
 
                 Spacer(modifier = Modifier.size(16.dp))
 
                 Button(onClick = {
-                    favoritiesViewModel.delete(
+                    favoritesViewModel.delete(
                         Favorite(
                             title = favorite.title,
                             image = favorite.image,
@@ -89,6 +89,7 @@ fun FavoriteItem(
                             releaseDate = favorite.releaseDate
                         )
                     )
+                    favoritesViewModel.fetchAllFavorites()
                 }, colors = ButtonDefaults.buttonColors(yellow)) {
                     Text(
                         text = stringResource(R.string.remove_favorite_button_text),

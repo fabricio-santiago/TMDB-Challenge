@@ -7,7 +7,7 @@ import javax.inject.Inject
 class FavoriteRepository @Inject constructor(
     private val dao: FavoriteDao
 ) {
-    fun getAll() = dao.getAllFavorities()
+    fun getAll() = dao.getAllFavorites()
     suspend fun insert(favorite: Favorite) = dao.insert(favorite)
     suspend fun delete(favorite: Favorite) = dao.delete(favorite)
 }

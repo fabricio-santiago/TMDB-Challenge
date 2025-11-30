@@ -36,7 +36,7 @@ import com.santiago.fabricio.tmdbchallenge.core.data.local.entity.Favorite
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.model.Movie
 import com.santiago.fabricio.tmdbchallenge.core.util.Constants.BASE_URL_IMAGE
 import com.santiago.fabricio.tmdbchallenge.core.util.UtilFunctions.convertDate
-import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritiesViewModel
+import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritesViewModel
 import com.santiago.fabricio.tmdbchallenge.theme.yellow
 import java.text.DecimalFormat
 
@@ -44,7 +44,7 @@ import java.text.DecimalFormat
 @Composable
 fun MovieItem(
     movie: Movie,
-    favoritiesViewModel: FavoritiesViewModel
+    favoritesViewModel: FavoritesViewModel
 ) {
     val context = LocalContext.current
     val decimalFormat = DecimalFormat("#.##")
@@ -124,7 +124,7 @@ fun MovieItem(
                 Spacer(modifier = Modifier.size(8.dp))
 
                 Button(onClick = {
-                    favoritiesViewModel.insert(
+                    favoritesViewModel.insert(
                         Favorite(
                             title = movie.title,
                             image = BASE_URL_IMAGE + movie.posterPath,
