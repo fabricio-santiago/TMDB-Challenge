@@ -7,6 +7,6 @@ import com.santiago.fabricio.tmdbchallenge.core.data.remote.response.MoviesRespo
 interface MoviesRemoteDataSource {
     fun getMoviesPageSource(): MoviesPageSource
     suspend fun getMovies(page: Int): MoviesResponse
-    fun getSearchMoviesPageSource(): SearchPageSource
+    fun getSearchMoviesPageSource(query: String): SearchPageSource
     suspend fun getSearchMovies(page: Int, query: String): MoviesResponse
 }

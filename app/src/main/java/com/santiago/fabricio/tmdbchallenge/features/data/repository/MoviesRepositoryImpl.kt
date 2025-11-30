@@ -24,7 +24,7 @@ class MoviesRepositoryImpl(
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = {
-                remoteDataSource.getSearchMoviesPageSource()
+                remoteDataSource.getSearchMoviesPageSource(query)
             }
         ).flow
     }

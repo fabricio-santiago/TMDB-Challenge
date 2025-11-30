@@ -47,10 +47,15 @@ fun SearchContent(
     Column(modifier = Modifier.fillMaxWidth().padding(top = 48.dp)) {
         SearchBar(
             query = searchQuery,
-            onQueryChange = {  searchQuery = it },
+            onQueryChange = {
+                searchQuery = it
+                if(searchQuery.length >= 3) {
+                    searchViewModel.getSearchMovies(query = searchQuery)
+                }
+            },
             onSearch = { },
             active = false,
-            onActiveChange = { searchViewModel.getSearchMovies(searchQuery) },
+            onActiveChange = { },
             placeholder = { Text(stringResource(id = R.string.search_bar_label)) },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search icon") },
             modifier = Modifier.fillMaxWidth().padding(8.dp)

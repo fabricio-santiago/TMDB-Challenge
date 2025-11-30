@@ -32,10 +32,12 @@
 
     //Components
     <string name="error_view_button_text">Recarregar</string>
-    <string name="empty_data_screen_description">No data</string>
+    <string name="empty_data_screen_description">Nenhum Favorito</string>
     <string name="add_favorite_button_text">Incluir Favorito</string>
     <string name="remove_favorite_button_text">Remover Favorito</string>
     <string name="movies_favorite_button">Botão de inclusão ou exclusão dos favoritos</string>
     <string name="search_bar_label">Digite o título de algum filme</string>
+    <string name="add_favorite_text">Filme Adicionado aos favoritos</string>
+    <string name="remove_favorite_text">Filme Removido dos favoritos</string>
 
 </resources>

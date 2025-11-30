@@ -6,7 +6,6 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import com.santiago.fabricio.tmdbchallenge.TestDispatcherRule
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.service.util.SafeApiCaller
-import com.santiago.fabricio.tmdbchallenge.core.domain.model.LocationsFactory
 import com.santiago.fabricio.tmdbchallenge.features.data.mapper.toRepository
 import com.santiago.fabricio.tmdbchallenge.features.domain.source.LocationsRemoteDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi

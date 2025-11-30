@@ -9,5 +9,5 @@ class FavoriteRepository @Inject constructor(
 ) {
     fun getAll() = dao.getAllFavorites()
     suspend fun insert(favorite: Favorite) = dao.insert(favorite)
-    suspend fun delete(favorite: Favorite) = dao.delete(favorite)
+    suspend fun delete(title: String) = dao.delete(title)
 }

@@ -20,8 +20,8 @@ class MoviesRemoteDataSourceImpl @Inject constructor(
         return service.getMovies(page)
     }
 
-    override fun getSearchMoviesPageSource(): SearchPageSource {
-        return SearchPageSource(this, safeApiCaller)
+    override fun getSearchMoviesPageSource(query: String): SearchPageSource {
+        return SearchPageSource(this, safeApiCaller, query)
     }
 
     override suspend fun getSearchMovies(page: Int, query: String): MoviesResponse {

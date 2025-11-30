@@ -2,13 +2,12 @@ package com.santiago.fabricio.tmdbchallenge.core.data.remote.paging
 
 import androidx.paging.PagingSource
 import com.google.common.truth.Truth.assertThat
-import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import com.santiago.fabricio.tmdbchallenge.TestDispatcherRule
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.service.util.SafeApiCaller
-import com.santiago.fabricio.tmdbchallenge.core.domain.model.CharactersFactory
+import com.santiago.fabricio.tmdbchallenge.core.domain.model.MoviesFactory
 import com.santiago.fabricio.tmdbchallenge.features.data.mapper.toRepository
-import com.santiago.fabricio.tmdbchallenge.features.domain.source.CharactersRemoteDataSource
+import com.santiago.fabricio.tmdbchallenge.features.domain.source.MoviesRemoteDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 import org.junit.Test
@@ -24,23 +23,23 @@ class CharactersPagingSourceTest {
     val dispatcherRule = TestDispatcherRule()
 
     @Mock
-    lateinit var remoteDataSource: CharactersRemoteDataSource
+    lateinit var remoteDataSource: MoviesRemoteDataSource
 
     @Mock
     lateinit var safeApiCaller: SafeApiCaller
 
-    private val charactersPagingFactory = CharactersFactory.create()
+    private val charactersPagingFactory = MoviesFactory.create()
 
 
     private val charactersPagingSource by lazy {
-        CharactersPageSource(remoteDataSource = remoteDataSource, safeApiCaller = safeApiCaller)
+        MoviesPageSource(remoteDataSource = remoteDataSource, safeApiCaller = safeApiCaller)
     }
 
     @Test
     suspend fun `must return success load result when load is called`() {
 
         //Given
-        whenever(remoteDataSource.getCharacters(any())).thenReturn(charactersPagingFactory)
+        whenever(remoteDataSource.getMoviesPageSource()).thenReturn(charactersPagingFactory)
 
         //When
         val result = charactersPagingSource.load(
@@ -52,7 +51,7 @@ class CharactersPagingSourceTest {
         )
 
         val resultExpected = listOf(
-            CharactersFactory.create().results.toRepository()
+            MoviesFactory.create().results.toRepository()
         )
 
         //Then
@@ -62,8 +61,6 @@ class CharactersPagingSourceTest {
                 prevKey = null,
                 nextKey = null
             )
-        ).isEqualTo(
-            result
-        )
+        ).isEqualTo(result)
     }
 }

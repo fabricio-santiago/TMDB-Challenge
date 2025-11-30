@@ -1,6 +1,9 @@
 package com.santiago.fabricio.tmdbchallenge.features.presentation.components
 
 import android.os.Build
+import android.view.Gravity
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -48,6 +51,7 @@ fun MovieItem(
 ) {
     val context = LocalContext.current
     val decimalFormat = DecimalFormat("#.##")
+    val toast: Toast = makeText(context, R.string.add_favorite_text, Toast.LENGTH_LONG)
 
     OutlinedCard(
         modifier = Modifier
@@ -132,9 +136,11 @@ fun MovieItem(
                             releaseDate = movie.releaseDate
                         )
                     )
+                    toast.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 200)
+                    toast.show()
                 }, colors = ButtonDefaults.buttonColors(yellow)) {
                     Text(
-                        text = stringResource(R.string.error_view_button_text),
+                        text = favoritesViewModel.allFavorites.value.contains(movie)  stringResource(R.string.add_favorite_button_text),
                         color = MaterialTheme.colorScheme.secondary,
                         modifier = Modifier.clearAndSetSemantics {
                             contentDescription =

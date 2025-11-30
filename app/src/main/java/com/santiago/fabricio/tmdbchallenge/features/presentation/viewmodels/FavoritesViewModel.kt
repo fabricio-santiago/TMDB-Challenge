@@ -20,6 +20,10 @@ class FavoritesViewModel @Inject constructor(
     private val _allFavorites = MutableStateFlow(emptyList<Favorite>())
     val allFavorites = _allFavorites.asStateFlow()
 
+//    init {
+//        fetchAllFavorites()
+//    }
+
     fun insert(favorite: Favorite) {
         viewModelScope.launch {
             repository.insert(favorite)
@@ -28,7 +32,7 @@ class FavoritesViewModel @Inject constructor(
 
     fun delete(favorite: Favorite) {
         viewModelScope.launch {
-            repository.delete(favorite)
+            repository.delete(favorite.title)
         }
     }
 

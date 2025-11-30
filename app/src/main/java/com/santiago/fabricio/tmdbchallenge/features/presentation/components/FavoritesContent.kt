@@ -18,6 +18,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.dp
 import com.santiago.fabricio.tmdbchallenge.R
+import com.santiago.fabricio.tmdbchallenge.core.components.EmptyDataScreen
 import com.santiago.fabricio.tmdbchallenge.core.data.local.entity.Favorite
 import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritesViewModel
 
@@ -31,25 +32,29 @@ fun FavoritesContent(
 ) {
     val context = LocalContext.current
 
-    Surface(modifier = modifier.background(MaterialTheme.colorScheme.background)) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(1),
-            contentPadding = paddingValues,
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
-            modifier = Modifier
-                .fillMaxSize()
-                .clearAndSetSemantics {
-                    contentDescription =
-                        context.getString(R.string.favorites_content_description_lazy_vertical_grid)
+    if(favorites.isEmpty()){
+        EmptyDataScreen()
+    } else {
+        Surface(modifier = modifier.background(MaterialTheme.colorScheme.background)) {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(1),
+                contentPadding = paddingValues,
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clearAndSetSemantics {
+                        contentDescription =
+                            context.getString(R.string.favorites_content_description_lazy_vertical_grid)
+                    }
+            ) {
+                items(favorites.size) { index ->
+                    val favorite = favorites[index]
+                    FavoriteItem(
+                        favorite = favorite,
+                        favoritesViewModel = favoritesViewModel
+                    )
                 }
-        ) {
-            items(favorites.size) { index ->
-                val favorite = favorites[index]
-                FavoriteItem(
-                    favorite = favorite,
-                    favoritesViewModel = favoritesViewModel
-                )
             }
         }
     }

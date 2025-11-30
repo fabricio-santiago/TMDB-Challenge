@@ -6,8 +6,8 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.santiago.fabricio.tmdbchallenge.TestDispatcherRule
 import com.santiago.fabricio.tmdbchallenge.core.domain.model.MoviesFactory
 import com.santiago.fabricio.tmdbchallenge.features.data.mapper.toRepository
-import com.santiago.fabricio.tmdbchallenge.features.domain.usecase.MoviesUseCase
-import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.MoviesViewModel
+import com.santiago.fabricio.tmdbchallenge.features.domain.usecase.SearchUseCase
+import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.SearchViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
@@ -20,16 +20,16 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
-class MoviesViewModelTest {
+class SearchViewModelTest {
 
     @get:Rule
     val dispatcherRule = TestDispatcherRule()
 
     @Mock
-    lateinit var moviesUseCase: MoviesUseCase
+    lateinit var searchUseCase: SearchUseCase
 
     private val viewModel by lazy {
-        MoviesViewModel(moviesUseCase = moviesUseCase)
+        SearchViewModel(searchUseCase = searchUseCase)
     }
 
     private val fakePagingDataCharacters = PagingData.from(
@@ -40,7 +40,7 @@ class MoviesViewModelTest {
     fun `must validate paging data object values when calling paging data from characters`() =
         runTest {
             //Given
-            whenever(moviesUseCase.invoke()).thenReturn(
+            whenever(searchUseCase.invoke("")).thenReturn(
                 flowOf(fakePagingDataCharacters)
             )
 
@@ -55,7 +55,7 @@ class MoviesViewModelTest {
     fun `must thrown an exception when the calling to the use case return an exception`() =
         runTest {
             //Given
-            whenever(moviesUseCase.invoke()).thenThrow(RuntimeException())
+            whenever(searchUseCase.invoke("")).thenThrow(RuntimeException())
 
             //When
             val result = viewModel.uiState.movies

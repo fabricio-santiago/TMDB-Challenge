@@ -13,13 +13,12 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import com.google.common.truth.Truth.assertThat
-import com.santiago.fabricio.tmdbchallenge.core.domain.model.LocationsFactory
 import com.santiago.fabricio.tmdbchallenge.features.domain.usecase.LocationsUseCase
 import kotlinx.coroutines.test.runTest
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
-class LocationsViewModelTest {
+class FavoritesViewModelTest {
 
     @get:Rule
     val dispatcherRule = TestDispatcherRule()

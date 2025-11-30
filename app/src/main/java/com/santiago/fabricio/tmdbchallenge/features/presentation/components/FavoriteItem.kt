@@ -1,6 +1,9 @@
 package com.santiago.fabricio.tmdbchallenge.features.presentation.components
 
 import android.os.Build
+import android.view.Gravity
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +36,7 @@ import com.santiago.fabricio.tmdbchallenge.core.data.local.entity.Favorite
 import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritesViewModel
 import com.santiago.fabricio.tmdbchallenge.theme.yellow
 
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun FavoriteItem(
@@ -40,6 +44,7 @@ fun FavoriteItem(
     favoritesViewModel: FavoritesViewModel
 ) {
     val context = LocalContext.current
+    val toast: Toast = makeText(context, R.string.remove_favorite_text, Toast.LENGTH_LONG)
 
     OutlinedCard(
         modifier = Modifier
@@ -90,6 +95,8 @@ fun FavoriteItem(
                         )
                     )
                     favoritesViewModel.fetchAllFavorites()
+                    toast.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 200)
+                    toast.show()
                 }, colors = ButtonDefaults.buttonColors(yellow)) {
                     Text(
                         text = stringResource(R.string.remove_favorite_button_text),

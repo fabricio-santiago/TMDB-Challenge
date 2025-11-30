@@ -15,7 +15,8 @@ import timber.log.Timber
 
 class SearchPageSource(
     private val remoteDataSource: MoviesRemoteDataSource,
-    private val safeApiCaller: SafeApiCaller
+    private val safeApiCaller: SafeApiCaller,
+    private val query: String
 ) : PagingSource<Int, Movie>() {
 
     companion object {
@@ -33,7 +34,7 @@ class SearchPageSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
         val pageNumber = params.key ?: 1
         safeApiCaller.safeApiCall {
-            remoteDataSource.getSearchMovies(pageNumber, "Clube")
+            remoteDataSource.getSearchMovies(pageNumber, query)
         }.onSuccess { response ->
             Timber.tag("").e(response.toString());
             return LoadResult.Page(
