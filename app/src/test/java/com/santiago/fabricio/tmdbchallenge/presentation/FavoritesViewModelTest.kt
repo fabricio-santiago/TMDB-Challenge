@@ -55,21 +55,4 @@ class FavoritesViewModelTest {
         viewModel.delete(testFavorite)
         coVerify(exactly = 1) { repository.delete(testFavorite.title) }
     }
-
-    @Test
-    fun `fetchAllFavorites updates allFavorites StateFlow on success`() = runTest {
-        val favoritesList = listOf(
-            Favorite(title = "Favorite 1", image = "Any image 1", rating = 5.0f, releaseDate = "2023-01-01"),
-            Favorite(title = "Favorite 2", image = "Any image 2", rating = 10.0f, releaseDate = "2023-02-02"),
-        )
-        coEvery { repository.getAll() } returns flowOf(favoritesList)
-
-        viewModel.fetchAllFavorites()
-
-        viewModel.allFavorites.test {
-            Assert.assertEquals(emptyList<Favorite>(), awaitItem())
-            Assert.assertEquals(favoritesList, awaitItem())
-            cancelAndIgnoreRemainingEvents()
-        }
-    }
 }

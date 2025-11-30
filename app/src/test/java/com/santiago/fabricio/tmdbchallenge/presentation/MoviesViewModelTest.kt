@@ -32,16 +32,16 @@ class MoviesViewModelTest {
         MoviesViewModel(moviesUseCase = moviesUseCase)
     }
 
-    private val fakePagingDataCharacters = PagingData.from(
+    private val fakePagingDataMovies = PagingData.from(
         MoviesFactory.create().results.toRepository()
     )
 
     @Test
-    fun `must validate paging data object values when calling paging data from characters`() =
+    fun `must validate paging data object values when calling paging data from movies`() =
         runTest {
             //Given
             whenever(moviesUseCase.invoke()).thenReturn(
-                flowOf(fakePagingDataCharacters)
+                flowOf(fakePagingDataMovies)
             )
 
             //When
@@ -61,6 +61,6 @@ class MoviesViewModelTest {
             val result = viewModel.uiState.movies
 
             //Then
-            assertThat(result).isNotSameInstanceAs(fakePagingDataCharacters)
+            assertThat(result).isNotSameInstanceAs(fakePagingDataMovies)
         }
 }

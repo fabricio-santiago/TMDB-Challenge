@@ -2,6 +2,7 @@ package com.santiago.fabricio.tmdbchallenge.core.data.remote.paging
 
 import androidx.paging.PagingSource
 import com.google.common.truth.Truth.assertThat
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import com.santiago.fabricio.tmdbchallenge.TestDispatcherRule
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.service.util.SafeApiCaller
@@ -38,7 +39,7 @@ class MoviesPagingSourceTest {
     suspend fun `must return success load result when load is called`() {
 
         //Given
-        whenever(remoteDataSource.getMovies(1)).thenReturn(moviesPagingFactory)
+        whenever(remoteDataSource.getMovies(any())).thenReturn(moviesPagingFactory)
 
         //When
         val result = moviesPagingSource.load(

@@ -31,7 +31,7 @@ class SearchPagingSourceTest {
 
     private val searchPagingFactory = MoviesFactory.create()
 
-    private val locationsPagingSource by lazy {
+    private val searchPagingSource by lazy {
         SearchPageSource(remoteDataSource = remoteDataSource, safeApiCaller = safeApiCaller, query = "")
     }
 
@@ -42,7 +42,7 @@ class SearchPagingSourceTest {
         whenever(remoteDataSource.getSearchMovies(any(), any())).thenReturn(searchPagingFactory)
 
         //When
-        val result = locationsPagingSource.load(
+        val result = searchPagingSource.load(
             PagingSource.LoadParams.Refresh(
                 key = null,
                 loadSize = 20,

@@ -32,16 +32,16 @@ class SearchViewModelTest {
         SearchViewModel(searchUseCase = searchUseCase)
     }
 
-    private val fakePagingDataCharacters = PagingData.from(
+    private val fakePagingDataMovies = PagingData.from(
         MoviesFactory.create().results.toRepository()
     )
 
     @Test
-    fun `must validate paging data object values when calling paging data from characters`() =
+    fun `must validate paging data object values when calling paging data from movies`() =
         runTest {
             //Given
-            whenever(searchUseCase.invoke("")).thenReturn(
-                flowOf(fakePagingDataCharacters)
+            whenever(searchUseCase.invoke("voo")).thenReturn(
+                flowOf(fakePagingDataMovies)
             )
 
             //When
@@ -61,6 +61,6 @@ class SearchViewModelTest {
             val result = viewModel.uiState.movies
 
             //Then
-            assertThat(result).isNotSameInstanceAs(fakePagingDataCharacters)
+            assertThat(result).isNotSameInstanceAs(fakePagingDataMovies)
         }
 }
