@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
-class CharactersPagingSourceTest {
+class MoviesPagingSourceTest {
 
     @get:Rule
     val dispatcherRule = TestDispatcherRule()
@@ -28,10 +28,9 @@ class CharactersPagingSourceTest {
     @Mock
     lateinit var safeApiCaller: SafeApiCaller
 
-    private val charactersPagingFactory = MoviesFactory.create()
+    private val moviesPagingFactory = MoviesFactory.create()
 
-
-    private val charactersPagingSource by lazy {
+    private val moviesPagingSource by lazy {
         MoviesPageSource(remoteDataSource = remoteDataSource, safeApiCaller = safeApiCaller)
     }
 
@@ -39,10 +38,10 @@ class CharactersPagingSourceTest {
     suspend fun `must return success load result when load is called`() {
 
         //Given
-        whenever(remoteDataSource.getMoviesPageSource()).thenReturn(charactersPagingFactory)
+        whenever(remoteDataSource.getMovies(1)).thenReturn(moviesPagingFactory)
 
         //When
-        val result = charactersPagingSource.load(
+        val result = moviesPagingSource.load(
             PagingSource.LoadParams.Refresh(
                 key = null,
                 loadSize = 20,

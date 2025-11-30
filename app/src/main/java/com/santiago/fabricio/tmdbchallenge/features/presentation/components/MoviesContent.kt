@@ -24,6 +24,7 @@ import androidx.paging.compose.LazyPagingItems
 import com.santiago.fabricio.tmdbchallenge.R
 import com.santiago.fabricio.tmdbchallenge.core.components.ErrorView
 import com.santiago.fabricio.tmdbchallenge.core.components.LoadingView
+import com.santiago.fabricio.tmdbchallenge.core.data.local.entity.Favorite
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.model.Movie
 import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritesViewModel
 
@@ -33,7 +34,8 @@ fun MoviesContent(
     modifier: Modifier = Modifier,
     pagingMovies: LazyPagingItems<Movie>,
     paddingValues: PaddingValues,
-    favoritesViewModel: FavoritesViewModel
+    favoritesViewModel: FavoritesViewModel,
+    favorites: List<Favorite>,
 ) {
 
     val context = LocalContext.current
@@ -56,7 +58,8 @@ fun MoviesContent(
                 movie?.let { item ->
                     MovieItem(
                         movie = item,
-                        favoritesViewModel = favoritesViewModel
+                        favoritesViewModel = favoritesViewModel,
+                        favorites = favorites
                     )
                 }
             }

@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -26,6 +27,8 @@ fun SearchScreen() {
     val uiState: MoviesState = searchViewModel.uiState
     val movies = uiState.movies.collectAsLazyPagingItems()
 
+    val uiStateFavorite = favoritesViewModel.allFavorites.collectAsState()
+
     Scaffold(topBar = {
         CustomAppBar(
             title = stringResource(id = R.string.search_screen_title_app_bar)
@@ -36,7 +39,8 @@ fun SearchScreen() {
             searchViewModel = searchViewModel,
             pagingMovies = movies,
             paddingValues = paddingValues,
-            favoritesViewModel = favoritesViewModel
+            favoritesViewModel = favoritesViewModel,
+            favorites = uiStateFavorite.value
         )
     })
 }

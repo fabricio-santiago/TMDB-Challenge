@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.santiago.fabricio.tmdbchallenge.R
+import com.santiago.fabricio.tmdbchallenge.core.data.local.entity.Favorite
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.model.Movie
 import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritesViewModel
 import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.SearchViewModel
@@ -36,7 +37,8 @@ fun SearchContent(
     searchViewModel: SearchViewModel,
     pagingMovies: LazyPagingItems<Movie>,
     paddingValues: PaddingValues,
-    favoritesViewModel: FavoritesViewModel
+    favoritesViewModel: FavoritesViewModel,
+    favorites: List<Favorite>,
 ){
     var searchQuery by remember { mutableStateOf("") }
 
@@ -67,7 +69,8 @@ fun SearchContent(
                 movie?.let { item ->
                     MovieItem(
                         movie = item,
-                        favoritesViewModel = favoritesViewModel
+                        favoritesViewModel = favoritesViewModel,
+                        favorites = favorites
                     )
                 }
             }

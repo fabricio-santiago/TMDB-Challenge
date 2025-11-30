@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -23,6 +24,8 @@ fun MoviesScreen() {
     val uiState: MoviesState = moviesViewModel.uiState
     val movies = uiState.movies.collectAsLazyPagingItems()
 
+    val uiStateFavorite = favoritesViewModel.allFavorites.collectAsState()
+
     Scaffold(
         topBar = {
             CustomAppBar(
@@ -33,7 +36,8 @@ fun MoviesScreen() {
             MoviesContent(
                 pagingMovies = movies,
                 paddingValues = paddingValues,
-                favoritesViewModel = favoritesViewModel
+                favoritesViewModel = favoritesViewModel,
+                favorites = uiStateFavorite.value,
             )
         }
     )

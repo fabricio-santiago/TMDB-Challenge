@@ -77,6 +77,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.core.ktx)
+    implementation(libs.androidx.runner)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -146,10 +148,11 @@ dependencies {
     testImplementation (libs.androidx.core.testing)
     testImplementation (libs.kotlinx.coroutines.test)
     testImplementation (libs.mockito.kotlin)
-    testImplementation (libs.kotlinx.coroutines.test)
-    testImplementation (libs.mockito.kotlin)
     testImplementation (libs.mockito.inline)
     testImplementation (libs.androidx.room.testing)
+    testImplementation (libs.mockk)
+    testImplementation (libs.cash.turbine)
+    testImplementation (libs.paging.common)
 
     // Instrumentation tests
     androidTestImplementation (libs.androidx.core.testing)

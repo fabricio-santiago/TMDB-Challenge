@@ -42,16 +42,19 @@ import com.santiago.fabricio.tmdbchallenge.core.util.UtilFunctions.convertDate
 import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.FavoritesViewModel
 import com.santiago.fabricio.tmdbchallenge.theme.yellow
 import java.text.DecimalFormat
+import kotlin.text.contains
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MovieItem(
     movie: Movie,
-    favoritesViewModel: FavoritesViewModel
+    favoritesViewModel: FavoritesViewModel,
+    favorites: List<Favorite>
 ) {
     val context = LocalContext.current
     val decimalFormat = DecimalFormat("#.##")
-    val toast: Toast = makeText(context, R.string.add_favorite_text, Toast.LENGTH_LONG)
+    val toastAdd: Toast = makeText(context, R.string.add_favorite_text, Toast.LENGTH_LONG)
+    val toastRemove: Toast = makeText(context, R.string.remove_favorite_text, Toast.LENGTH_LONG)
 
     OutlinedCard(
         modifier = Modifier
@@ -128,19 +131,33 @@ fun MovieItem(
                 Spacer(modifier = Modifier.size(8.dp))
 
                 Button(onClick = {
-                    favoritesViewModel.insert(
-                        Favorite(
-                            title = movie.title,
-                            image = BASE_URL_IMAGE + movie.posterPath,
-                            rating = movie.voteAverage,
-                            releaseDate = movie.releaseDate
+                    if(inFavoriteList(favorites, movie.title)) {
+                        favoritesViewModel.delete(
+                            Favorite(
+                                title = movie.title,
+                                image = BASE_URL_IMAGE + movie.posterPath,
+                                rating = movie.voteAverage,
+                                releaseDate = movie.releaseDate
+                            )
                         )
-                    )
-                    toast.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 200)
-                    toast.show()
+                        toastRemove.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 200)
+                        toastRemove.show()
+
+                    }else{
+                        favoritesViewModel.insert(
+                            Favorite(
+                                title = movie.title,
+                                image = BASE_URL_IMAGE + movie.posterPath,
+                                rating = movie.voteAverage,
+                                releaseDate = movie.releaseDate
+                            )
+                        )
+                        toastAdd.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 200)
+                        toastAdd.show()
+                    }
                 }, colors = ButtonDefaults.buttonColors(yellow)) {
                     Text(
-                        text = favoritesViewModel.allFavorites.value.contains(movie)  stringResource(R.string.add_favorite_button_text),
+                        text = if (inFavoriteList(favorites, movie.title)) stringResource(R.string.remove_favorite_button_text) else stringResource(R.string.add_favorite_button_text),
                         color = MaterialTheme.colorScheme.secondary,
                         modifier = Modifier.clearAndSetSemantics {
                             contentDescription =
@@ -150,4 +167,8 @@ fun MovieItem(
             }
         }
     }
+}
+
+fun inFavoriteList(movies: List<Favorite>, query: String): Boolean {
+    return movies.any { movie -> movie.title.contains(query, ignoreCase = true) }
 }

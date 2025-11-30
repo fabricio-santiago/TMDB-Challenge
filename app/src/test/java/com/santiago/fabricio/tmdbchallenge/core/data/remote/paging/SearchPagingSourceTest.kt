@@ -6,8 +6,9 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import com.santiago.fabricio.tmdbchallenge.TestDispatcherRule
 import com.santiago.fabricio.tmdbchallenge.core.data.remote.service.util.SafeApiCaller
+import com.santiago.fabricio.tmdbchallenge.core.domain.model.MoviesFactory
 import com.santiago.fabricio.tmdbchallenge.features.data.mapper.toRepository
-import com.santiago.fabricio.tmdbchallenge.features.domain.source.LocationsRemoteDataSource
+import com.santiago.fabricio.tmdbchallenge.features.domain.source.MoviesRemoteDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 import org.junit.Test
@@ -17,29 +18,28 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
-class LocationsPagingSourceTest {
+class SearchPagingSourceTest {
 
     @get:Rule
     val dispatcherRule = TestDispatcherRule()
 
     @Mock
-    lateinit var remoteDataSource: LocationsRemoteDataSource
+    lateinit var remoteDataSource: MoviesRemoteDataSource
 
     @Mock
     lateinit var safeApiCaller: SafeApiCaller
 
-    private val locationsPagingFactory = LocationsFactory.create()
-
+    private val searchPagingFactory = MoviesFactory.create()
 
     private val locationsPagingSource by lazy {
-        LocationsPageSource(remoteDataSource = remoteDataSource, safeApiCaller = safeApiCaller)
+        SearchPageSource(remoteDataSource = remoteDataSource, safeApiCaller = safeApiCaller, query = "")
     }
 
     @Test
     suspend fun `must return success load result when load is called`() {
 
         //Given
-        whenever(remoteDataSource.getLocations(any())).thenReturn(locationsPagingFactory)
+        whenever(remoteDataSource.getSearchMovies(any(), any())).thenReturn(searchPagingFactory)
 
         //When
         val result = locationsPagingSource.load(
@@ -51,7 +51,7 @@ class LocationsPagingSourceTest {
         )
 
         val resultExpected = listOf(
-            LocationsFactory.create().results.toRepository()
+            MoviesFactory.create().results.toRepository()
         )
 
         //Then
@@ -61,8 +61,6 @@ class LocationsPagingSourceTest {
                 prevKey = null,
                 nextKey = null
             )
-        ).isEqualTo(
-            result
-        )
+        ).isEqualTo(result)
     }
 }

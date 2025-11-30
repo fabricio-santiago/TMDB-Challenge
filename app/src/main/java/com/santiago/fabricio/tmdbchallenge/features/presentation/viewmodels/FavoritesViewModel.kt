@@ -20,9 +20,9 @@ class FavoritesViewModel @Inject constructor(
     private val _allFavorites = MutableStateFlow(emptyList<Favorite>())
     val allFavorites = _allFavorites.asStateFlow()
 
-//    init {
-//        fetchAllFavorites()
-//    }
+    init {
+        fetchAllFavorites()
+    }
 
     fun insert(favorite: Favorite) {
         viewModelScope.launch {

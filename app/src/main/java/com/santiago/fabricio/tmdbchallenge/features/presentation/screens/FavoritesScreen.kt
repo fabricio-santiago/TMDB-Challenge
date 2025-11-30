@@ -19,7 +19,7 @@ import com.santiago.fabricio.tmdbchallenge.features.presentation.viewmodels.Favo
 fun FavoritesScreen() {
 
     val favoritesViewModel: FavoritesViewModel = hiltViewModel()
-    favoritesViewModel.fetchAllFavorites()
+    //favoritesViewModel.fetchAllFavorites()
 
     val uiState = favoritesViewModel.allFavorites.collectAsState()
 
